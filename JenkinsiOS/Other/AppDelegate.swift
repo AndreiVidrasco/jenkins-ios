@@ -6,15 +6,11 @@
 //  Copyright © 2016 MobiLab Solutions. All rights reserved.
 //
 
-import Firebase
-import FirebasePerformance
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-
-    let remoteConfigurationManager = RemoteConfigurationManager()
 
     func applicationDidEnterBackground(_: UIApplication) {
         ApplicationUserManager.manager.save()
@@ -27,10 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_: UIApplication) {
-        FirebaseApp.configure()
-
-        Fabric.with([Crashlytics.self])
-
         ApplicationUserManager.manager.applicationUser.timesOpenedApp += 1
         saveIndefinitely()
 
@@ -39,9 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setCurrentAccountForRootViewController()
         handleReviewReminder()
-
-        remoteConfigurationManager.activateRemoteConfiguration()
-        LoggingManager.loggingManager.logNumberOfAccounts(accounts: AccountManager.manager.accounts.count)
     }
 
     func applicationDidBecomeActive(_: UIApplication) {
@@ -67,7 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let nav = window?.rootViewController as? UINavigationController {
             nav.popToRootViewController(animated: false)
             nav.pushViewController(viewController(for: type, with: favorite), animated: false)
-            LoggingManager.loggingManager.logOpenFavoriteFromWidget()
         }
 
         return true

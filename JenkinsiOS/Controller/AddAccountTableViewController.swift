@@ -34,14 +34,12 @@ class AddAccountTableViewController: UITableViewController, VerificationFailureN
     weak var verificationFailurePresenter: VerificationFailurePresenting?
     weak var doneButtonContainer: DoneButtonContaining?
 
-    private let remoteConfigManager = RemoteConfigurationManager()
-
     private var shouldShowNameField: Bool {
-        return remoteConfigManager.configuration.shouldPresentDisplayNameField
+        return true
     }
 
     private var shouldShowSwitchAccountToggle: Bool {
-        return remoteConfigManager.configuration.shouldUseNewAccountDesign
+        return true
     }
 
     // MARK: - Outlets
@@ -102,10 +100,7 @@ class AddAccountTableViewController: UITableViewController, VerificationFailureN
         else { return }
 
         verify(account: account, onSuccess: { [weak self] in
-            let success = self?.addAccountWith(account: account)
-            if success == true {
-                LoggingManager.loggingManager.logAccountCreation(https: account.baseUrl.host == "https", allowsEveryCertificate: account.trustAllCertificates, github: false, displayName: account.displayName)
-            }
+            let _ = self?.addAccountWith(account: account)
         })
     }
 
@@ -217,11 +212,6 @@ class AddAccountTableViewController: UITableViewController, VerificationFailureN
                                               bottom: -(bottomOffset ?? 0), right: 0)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        LoggingManager.loggingManager.logAddAccountView(displayNameHidden: shouldShowNameField)
-    }
-
     private func verify(account: Account, onSuccess: @escaping () -> Void) {
         doneButtonContainer?.setDoneButton(alpha: 0.7)
         doneButtonContainer?.setDoneButton(title: "Verifying...")
@@ -279,7 +269,6 @@ class AddAccountTableViewController: UITableViewController, VerificationFailureN
         else { return }
         do {
             _ = try AccountManager.manager.deleteAccount(account: account)
-            LoggingManager.loggingManager.logDeleteAccount()
             delegate?.didDeleteAccount(account: account)
         } catch {
             print("An error occurred deleting the current account: \(error)")
@@ -407,12 +396,5 @@ extension AddAccountTableViewController {
 }
 
 extension AddAccountTableViewController {
-    private func presentSafariForApiFAQItem() {
-        guard let item = remoteConfigManager.configuration.frequentlyAskedQuestions
-            .first(where: { $0.key == Constants.Defaults.apiTokenFAQItemId })
-        else { return }
-
-        let safari = SFSafariViewController(url: item.url)
-        present(safari, animated: true, completion: nil)
-    }
+    private func presentSafariForApiFAQItem() {}
 }

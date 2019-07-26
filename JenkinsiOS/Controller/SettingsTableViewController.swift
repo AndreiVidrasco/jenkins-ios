@@ -19,10 +19,8 @@ class SettingsTableViewController: UITableViewController, AccountProvidable, Cur
         }
     }
 
-    private let remoteConfigManager = RemoteConfigurationManager()
-
     private var shouldUseDirectAccountDesign: Bool {
-        return remoteConfigManager.configuration.shouldUseNewAccountDesign
+        return true
     }
 
     var currentAccountDelegate: CurrentAccountProvidingDelegate?
@@ -105,11 +103,6 @@ class SettingsTableViewController: UITableViewController, AccountProvidable, Cur
         if #available(iOS 11.0, *) {
             tabBarController?.navigationItem.searchController = nil
         }
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        LoggingManager.loggingManager.logSettingsView(accountsIncluded: shouldUseDirectAccountDesign)
     }
 
     override func viewWillLayoutSubviews() {

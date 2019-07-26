@@ -6,9 +6,6 @@ target 'JenkinsiOS' do
   platform :ios, '10.0'
   use_frameworks!
   pod 'SAMKeychain'
-  pod 'Firebase/Core'
-  pod 'Firebase/Performance'
-  pod 'Firebase/RemoteConfig'
   pod 'Crashlytics'
 
   # Pods for JenkinsiOS
@@ -25,9 +22,6 @@ target 'JenkinsiOSTodayExtension' do
   platform :ios, '10.0'
   use_frameworks!
   pod 'SAMKeychain'
-  pod 'Firebase/Core'
-  pod 'Firebase/Performance'
-  pod 'Firebase/RemoteConfig'
   pod 'Crashlytics'
 
   # Pods for JenkinsiOSTodayExtension

@@ -524,8 +524,6 @@ extension JobsTableViewController: AllFavoritesTableViewCellDelegate {
     }
 
     func didSelectLoadedFavoritable(favoritable: Favoratible, for favorite: Favorite) {
-        LoggingManager.loggingManager.logOpenFavorite()
-
         switch favorite.type {
         case .build:
             performSegue(withIdentifier: Constants.Identifiers.showBuildSegue, sender: (favoritable, favorite))

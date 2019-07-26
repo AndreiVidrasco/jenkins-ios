@@ -10,12 +10,10 @@ import SafariServices
 import UIKit
 
 class FAQTableViewController: UITableViewController {
-    private let remoteConfigManager = RemoteConfigurationManager()
     private var questions: [FAQItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        questions = remoteConfigManager.configuration.frequentlyAskedQuestions
         tableView.backgroundColor = Constants.UI.backgroundColor
         tableView.separatorStyle = .none
 

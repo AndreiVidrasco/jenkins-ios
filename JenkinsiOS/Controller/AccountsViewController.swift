@@ -70,11 +70,6 @@ class AccountsViewController: UIViewController, AccountProvidable, UITableViewDe
         setBackNavigation(enabled: account != nil)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        LoggingManager.loggingManager.logAccountOverviewView()
-    }
-
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.reloadData()

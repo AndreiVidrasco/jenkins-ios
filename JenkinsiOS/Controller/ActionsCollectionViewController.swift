@@ -60,7 +60,6 @@ class ActionsCollectionViewController: UICollectionViewController, AccountProvid
                     }
                 } else {
                     showSuccessMessage()
-                    LoggingManager.loggingManager.logTriggeredAction(action: action)
                 }
             }
         }

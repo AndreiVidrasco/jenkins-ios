@@ -21,7 +21,9 @@ class ParametersTableViewController: UITableViewController {
         super.viewDidLoad()
 
         parameterValues = parameters.filter { $0.type != .unknown }.map({ ParameterValue(parameter: $0, value: $0.defaultParameterString) })
-
+        parameterValues
+            .filter { $0.parameter.type.isGit() }
+            .forEach { $0.value = ($0.parameter.additionalData as? [String])?.first }
         loadRunParameterPossibilities(for: parameterValues)
 
         tableView.rowHeight = UITableView.automaticDimension

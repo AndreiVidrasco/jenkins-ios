@@ -67,10 +67,7 @@ import UIKit
             animatable.startAnimating()
         }
 
-        guard let contentView = contentType
-        else { return }
-
-        LoggingManager.loggingManager.log(contentView: contentView)
+        guard let _ = contentType else { return }
     }
 
     /// How many sections there are in the given table view

@@ -268,5 +268,9 @@ struct Constants {
         static let safeRestart = "/safeRestart"
         static let exit = "/exit"
         static let safeExit = "/safeExit"
+        static let gitPlugin = "/descriptorByName/net.uaznia.lukanus.hudson.plugins.gitparameter.GitParameterDefinition/fillValueItems"
+        static func gitPluginAdditionalQueryItems(parameter: Parameter) -> [URLQueryItem]  {
+            return [URLQueryItem(name: "param", value: parameter.name)]
+        }
     }
 }

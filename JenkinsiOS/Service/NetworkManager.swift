@@ -193,8 +193,34 @@ class NetworkManager: NSObject {
             guard let json = data as? [String: AnyObject]
             else { completion(job, NetworkManagerError.JSONParsingFailed); return }
             job.addAdditionalFields(from: json, isBuildMinimalVersion: false)
-            completion(job, nil)
+            let gitParameters = job.parameters.filter { $0.type.isGit() }
+            if gitParameters.isEmpty {
+                completion(job, nil)
+            } else {
+                let dispatchGroup = DispatchGroup()
+                for git in gitParameters {
+                    dispatchGroup.enter()
+                    self.parseAdditionalGitInfo(userRequest: userRequest, gitParameter: git, completion: {
+                        dispatchGroup.leave()
+                    })
+                }
+                dispatchGroup.notify(queue: .main) {
+                    completion(job, nil)
+                }
+            }
         }
+    }
+    
+    func parseAdditionalGitInfo(userRequest: UserRequest, gitParameter: Parameter, completion: @escaping () -> Void) {
+        let userRequest = UserRequest.userRequestForJobGitParameter(account: userRequest.account, requestUrl: userRequest.requestUrl, parameter: gitParameter)
+        _ = performRequestForJson(userRequest: userRequest, method: .GET, completion: { (data, error) in
+            defer { completion() }
+            guard error == nil else { return }
+            guard let data = data else { return }
+            guard let json = data as? [String: AnyObject] else { return }
+            guard let values = json["values"] as? [[String: Any]] else { return }
+            gitParameter.additionalData = values.compactMap { $0["value"] } as AnyObject
+        })
     }
 
     /// Complete the information for a given build

@@ -26,8 +26,17 @@ enum ParameterType: String {
     case password = "PasswordParameterDefinition"
     case file = "FileParameterDefinition"
     case textBox = "TextParameterDefinition"
-    case unknown = "Unknown"
+    case gitBranch = "PT_BRANCH"
+    case gitTag = "PT_TAG"
+    case gitBranchTag = "PT_BRANCH_TAG"
+    case gitRevision = "PT_REVISION"
+    case gitPullRequest = "PT_PULL_REQUEST"
 
+    case unknown = "Unknown"
+    
+    func isGit() -> Bool {
+        return [ParameterType.gitTag, .gitBranch, .gitBranchTag, .gitRevision, .gitPullRequest].contains(self)
+    }
     /// Get the string that describes the additional data object in the json
     ///
     /// - Returns: The identifying string

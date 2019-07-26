@@ -52,6 +52,8 @@ class ParameterTableViewCell: UITableViewCell {
         case .string, .textBox: parameterInputView = textField(password: false)
         case .password: parameterInputView = textField(password: true)
         case .file: parameterInputView = openFileView()
+        case .gitBranch, .gitTag, .gitBranchTag, .gitRevision, .gitPullRequest:
+            parameterInputView = textFieldWithPickerView()
         case .unknown: parameterInputView = label(); descriptionLabel.text = "Unknown parameter type"
         }
 

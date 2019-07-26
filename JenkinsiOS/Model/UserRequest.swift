@@ -128,4 +128,9 @@ extension UserRequest {
         let url = account.baseUrl.appendingPathComponent(Constants.API.buildQueue)
         return UserRequest(requestUrl: url, account: account, additionalQueryItems: Constants.API.buildQueueAdditionalQueryItems)
     }
+    
+    static func userRequestForJobGitParameter(account: Account, requestUrl: URL, parameter: Parameter) -> UserRequest {
+        let url = requestUrl.appendingPathComponent(Constants.API.gitPlugin)
+        return UserRequest(requestUrl: url, account: account, additionalQueryItems: Constants.API.gitPluginAdditionalQueryItems(parameter: parameter))
+    }
 }

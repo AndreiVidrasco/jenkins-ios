@@ -90,7 +90,7 @@ class AccountManager {
         var accounts: [Account] = []
 
         let query = SAMKeychainQuery()
-        query.service = "com.mobilabsolutions.jenkins.account"
+        query.service = "com.vidrasco.jenkins"
         query.accessGroup = Constants.Config.keychainAccessGroup
 
         // The accounts that are available in our Keychain service. Relevant data here: account, password
@@ -132,7 +132,7 @@ class AccountManager {
         let query = SAMKeychainQuery()
         query.account = account.username
         query.password = account.password
-        query.service = "com.mobilabsolutions.jenkins.account"
+        query.service = "com.vidrasco.jenkins"
         query.accessGroup = Constants.Config.keychainAccessGroup
 
         try? query.save()
@@ -178,7 +178,7 @@ class AccountManager {
         if let username = account.username {
             let query = SAMKeychainQuery()
             query.account = username
-            query.service = "com.mobilabsolutions.jenkins.account"
+            query.service = "com.vidrasco.jenkins"
             query.accessGroup = Constants.Config.keychainAccessGroup
             try query.deleteItem()
         }

@@ -15,13 +15,6 @@
 		<string>iCloud.$(CFBundleIdentifier)</string>
 	</array>
 	<key>com.apple.security.application-groups</key>
-	<array>
-		<string>group.com.mobilabsolutions.jenkins.client.shared</string>
-	</array>
-	<key>keychain-access-groups</key>
-	<array>
-		<string>$(AppIdentifierPrefix)com.mobilabsolutions.jenkins.client</string>
-		<string>$(AppIdentifierPrefix)com.mobilabsolutions.jenkins.client.sharedKeychain</string>
-	</array>
+	<array/>
 </dict>
 </plist>

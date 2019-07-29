@@ -20,6 +20,6 @@ class PersistenceUtils {
     ///
     /// - returns: The URL describing the directory of the shared app group
     static func getSharedDirectory() -> URL? {
-        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.mobilabsolutions.jenkins.client.shared")
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     }
 }

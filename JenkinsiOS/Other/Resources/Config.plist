@@ -4,8 +4,6 @@
 <dict>
 	<key>App ID Prefix</key>
 	<string>S722Z9XR48</string>
-	<key>Shared Keychain Identifier</key>
-	<string>com.mobilabsolutions.jenkins.client.sharedKeychain</string>
 	<key>App Store ID</key>
 	<string>1196866502</string>
 </dict>
